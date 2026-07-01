@@ -16,6 +16,7 @@ struct RootView: View {
 
 struct DashboardView: View {
     @EnvironmentObject var store: TripStore
+    @EnvironmentObject var language: LanguageManager
     @Binding var showNewTrip: Bool
     @State private var template: TripTemplate?
 
@@ -55,6 +56,7 @@ struct DashboardView: View {
         .navigationBarTitleDisplayMode(.inline)
         .toolbar {
             ToolbarItem(placement: .topBarLeading) { BrandLogo() }
+            ToolbarItem(placement: .topBarTrailing) { languageMenu }
             ToolbarItem(placement: .topBarTrailing) {
                 Button { showNewTrip = true } label: {
                     Image(systemName: "plus.circle.fill").foregroundStyle(Brand.teal)
@@ -66,6 +68,23 @@ struct DashboardView: View {
         .sheet(item: $template) { tpl in
             NewTripView(template: tpl)
         }
+    }
+
+    private var languageMenu: some View {
+        Menu {
+            Picker(selection: Binding(
+                get: { language.current },
+                set: { language.set($0) }
+            )) {
+                ForEach(LanguageManager.Language.allCases) { lang in
+                    Text("\(lang.flag)  \(lang.displayName)").tag(lang)
+                }
+            } label: { EmptyView() }
+        } label: {
+            Image(systemName: "globe").foregroundStyle(Brand.teal)
+        }
+        .accessibilityIdentifier("languageMenu")
+        .accessibilityLabel("Language")
     }
 
     private var header: some View {

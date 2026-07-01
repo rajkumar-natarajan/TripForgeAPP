@@ -176,6 +176,7 @@ final class TripForgeUITests: XCTestCase {
         waitFor(app.staticTexts["Estimated spend"], 6, "App not responsive after PDF export")
     }
 
+    /// Tapping "Add to Calendar" must not crash (the app declares the
     /// NSCalendarsWriteOnlyAccessUsageDescription purpose string) and should
     /// surface the confirmation alert. Calendar access is pre-granted by the
     /// test runner via `simctl privacy grant calendar`.
@@ -195,5 +196,37 @@ final class TripForgeUITests: XCTestCase {
 
         // App is still responsive afterwards.
         waitFor(app.staticTexts["Estimated spend"], 6, "App not responsive after calendar action")
+    }
+
+    /// Switches the in-app language via the globe menu and verifies the UI
+    /// re-localizes, then restores English.
+    func testLanguageSwitch() {
+        // Dashboard starts in English (system).
+        waitFor(app.staticTexts["My Trips"], 8, "English dashboard not shown")
+
+        // Open the globe menu and pick Français.
+        let langMenu = app.buttons["languageMenu"]
+        waitFor(langMenu, 5, "Language menu not found")
+        langMenu.tap()
+        let french = app.buttons["🇫🇷  Français"]
+        waitFor(french, 5, "French option not found")
+        french.tap()
+
+        // The dashboard title should now be French.
+        waitFor(app.staticTexts["Mes voyages"], 8, "UI did not switch to French")
+
+        // Switch to Español.
+        langMenu.tap()
+        let spanish = app.buttons["🇪🇸  Español"]
+        waitFor(spanish, 5, "Spanish option not found")
+        spanish.tap()
+        waitFor(app.staticTexts["Mis viajes"], 8, "UI did not switch to Spanish")
+
+        // Restore English.
+        langMenu.tap()
+        let english = app.buttons["🇬🇧  English"]
+        waitFor(english, 5, "English option not found")
+        english.tap()
+        waitFor(app.staticTexts["My Trips"], 8, "UI did not switch back to English")
     }
 }

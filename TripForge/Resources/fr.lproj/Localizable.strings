@@ -141,3 +141,7 @@
 "No activities planned." = "Aucune activité prévue.";
 "Day %lld — %@" = "Jour %lld — %@";
 "Made with TripForge · Page %lld" = "Créé avec TripForge · Page %lld";
+
+/* Language menu */
+"Follow system" = "Suivre le système";
+"Language" = "Langue";
