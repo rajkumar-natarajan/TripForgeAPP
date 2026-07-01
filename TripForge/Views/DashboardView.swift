@@ -59,6 +59,8 @@ struct DashboardView: View {
                 Button { showNewTrip = true } label: {
                     Image(systemName: "plus.circle.fill").foregroundStyle(Brand.teal)
                 }
+                .accessibilityIdentifier("newTripButton")
+                .accessibilityLabel("New trip")
             }
         }
         .sheet(item: $template) { tpl in

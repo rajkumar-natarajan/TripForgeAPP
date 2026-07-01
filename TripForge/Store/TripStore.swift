@@ -10,7 +10,12 @@ final class TripStore: ObservableObject {
         return dir.appendingPathComponent("tripforge_trips.json")
     }()
 
-    init() { load() }
+    init() {
+        if ProcessInfo.processInfo.arguments.contains("UITEST_RESET") {
+            try? FileManager.default.removeItem(at: fileURL)
+        }
+        load()
+    }
 
     // MARK: Persistence
 

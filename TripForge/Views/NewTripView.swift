@@ -77,6 +77,7 @@ struct NewTripView: View {
                     .frame(minHeight: 110)
                     .scrollContentBackground(.hidden)
                     .padding(4)
+                    .accessibilityIdentifier("promptEditor")
             }
             .background(Brand.ink800.opacity(0.8))
             .clipShape(RoundedRectangle(cornerRadius: 12, style: .continuous))

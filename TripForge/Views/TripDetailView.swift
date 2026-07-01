@@ -123,6 +123,7 @@ struct TripDetailView: View {
                         .overlay(RoundedRectangle(cornerRadius: 12).stroke(i == activeDay ? Brand.teal.opacity(0.4) : Color.white.opacity(0.1)))
                         .foregroundStyle(.white)
                     }.buttonStyle(.plain)
+                    .accessibilityIdentifier("dayTab-\(i)")
                 }
             }
         }
@@ -252,14 +253,17 @@ struct ActivityRow: View {
                 VStack(spacing: 2) {
                     Button(action: onMoveUp) { Image(systemName: "chevron.up") }
                         .disabled(!canMoveUp).foregroundStyle(canMoveUp ? Brand.tealLight : Color.secondary)
+                        .accessibilityIdentifier("act-\(index)-up")
                     Button(action: onMoveDown) { Image(systemName: "chevron.down") }
                         .disabled(!canMoveDown).foregroundStyle(canMoveDown ? Brand.tealLight : Color.secondary)
+                        .accessibilityIdentifier("act-\(index)-down")
                 }.font(.caption)
             }
 
             VStack(alignment: .leading, spacing: 4) {
                 HStack {
                     Text(activity.title).font(.subheadline.weight(.semibold))
+                        .accessibilityIdentifier("actTitle-\(index)")
                     Spacer()
                     if activity.cost > 0 {
                         Text(Money.format(activity.cost, currency))

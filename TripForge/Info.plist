@@ -26,6 +26,8 @@
 	<string>TripForge adds your itinerary events to your calendar.</string>
 	<key>NSCalendarsUsageDescription</key>
 	<string>TripForge adds your itinerary events to your calendar.</string>
+	<key>NSCalendarsWriteOnlyAccessUsageDescription</key>
+	<string>TripForge adds your itinerary events to your calendar.</string>
 	<key>UIApplicationSceneManifest</key>
 	<dict>
 		<key>UIApplicationSupportsMultipleScenes</key>
