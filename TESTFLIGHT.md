@@ -2,12 +2,13 @@
 
 This guide walks you through getting the **TripForge** iOS app onto **TestFlight**, Apple's beta‑distribution service, so you (and up to 10,000 external testers) can install it on real iPhones/iPads over the air.
 
-There are two paths:
+There are three paths:
 
-- **Path A — Xcode GUI (recommended for your first upload).** Click‑through, hard to get wrong.
-- **Path B — Command line / CI (`release.sh`).** Repeatable, scriptable, good for later.
+- **Path C — Device‑free App Store profile (✅ recommended for this team).** No device needed. Works today.
+- **Path A — Xcode GUI.** Click‑through; needs a registered device for its automatic signing.
+- **Path B — Command line with automatic signing.** Repeatable, but needs a registered device.
 
-Both paths produce the same result: a signed build in App Store Connect → TestFlight.
+All paths produce the same result: a signed build in App Store Connect → TestFlight.
 
 ---
 
@@ -24,7 +25,11 @@ A signing check on this machine confirmed:
 | **Xcode** | ✅ 26.5 |
 | **App icon** | ✅ Bundled |
 
-**One gotcha to know:** this team currently has **no registered devices**, and no iPhone/iPad is connected to this Mac. Apple's *automatic* signing tries to make a **Development** profile first, which requires at least one registered device — so a headless `xcodebuild archive` fails with *"Your team has no devices…"*. The fix is simple and is handled cleanly by the **Xcode GUI path below** (Xcode creates the **App Store distribution** profile, which needs no device). If you prefer the CLI, first register one device (Path B, step B0).
+**One gotcha to know (and its fix):** this team currently has **no registered devices**, and no iPhone/iPad is connected to this Mac. Apple's *automatic* signing tries to make a **Development** profile first, which requires at least one registered device — so both the Xcode GUI and a headless `xcodebuild archive` fail with:
+
+> *Communication with Apple failed: Your team has no devices…* / *No profiles for 'com.rajkumar.tripforge' were found.*
+
+✅ **The fix that needs no device:** use a **manual App Store distribution profile** (created in the portal — distribution profiles don't require any device). This is **verified working** on this Mac and is the **recommended path** below (Path C). If you'd rather use automatic signing, just register one device first (see Path B → B0).
 
 ---
 
@@ -83,7 +88,47 @@ and run `xcodegen generate`, or pass `TEAM_ID=... ./release.sh`.
 
 ---
 
-## Path A — Upload with the Xcode GUI (recommended)
+## Path C — Device‑free App Store profile (✅ recommended)
+
+This is the **only path that needs no iPhone/iPad** and is **verified working** on this Mac. You create one *App Store* distribution profile in the portal (no device required), install it, then run one command.
+
+### C1. Create the App ID and App record
+Do **Section 1** (register App ID `com.rajkumar.tripforge`) and **Section 2** (create the App in App Store Connect) above, if you haven't already.
+
+### C2. Create an App Store distribution provisioning profile
+1. Go to <https://developer.apple.com/account/resources/profiles/list>.
+2. **➕ → Distribution → App Store Connect (App Store)** → **Continue**.
+3. **App ID:** select `com.rajkumar.tripforge` → **Continue**.
+4. **Certificate:** select your **Apple Distribution: Rajkumar Natarajan (Y62BAT7CF4)** cert → **Continue**.
+5. **Provisioning Profile Name:** type exactly **`TripForge App Store`** (the scripts use this name) → **Generate**.
+6. **Download** the `.mobileprovision` file, then **double‑click it** to install (or drag it onto the Xcode dock icon).
+
+> No device selection appears for App Store profiles — that's why this path needs no device.
+
+### C3. Get an upload credential
+Fastest is an **app‑specific password**: <https://account.apple.com> → *Sign‑In & Security → App‑Specific Passwords → Generate* (looks like `abcd-efgh-ijkl-mnop`). Or use an App Store Connect API key (see B1).
+
+### C4. Build, sign, and upload — one command
+```bash
+cd TripForgeApp
+TEAM_ID=Y62BAT7CF4 \
+PROFILE_NAME="TripForge App Store" \
+APPLE_ID="you@example.com" \
+APP_PASSWORD="abcd-efgh-ijkl-mnop" \
+MARKETING_VERSION=1.0.0 \
+./release.sh
+```
+`release.sh` detects `PROFILE_NAME` and switches to **manual Apple Distribution signing** (no device), archives, exports a signed `.ipa`, and uploads it to TestFlight.
+
+> Omit `APPLE_ID`/`APP_PASSWORD` and the script still builds the signed `.ipa` and prints its path — you can then drag it into **Transporter.app** to upload.
+
+### C5. Continue from Path A, step A6 (invite testers).
+
+---
+
+## Path A — Upload with the Xcode GUI
+
+> Path A's automatic signing needs a **registered device** (see the gotcha above). If you don't have one, use **Path C**. If you do, connect it once (Xcode → *Use for Development*) and this path works.
 
 ### A1. Open the project
 ```bash
@@ -223,13 +268,14 @@ BUILD_NUMBER=$(date +%s) MARKETING_VERSION=1.0.1 TEAM_ID=... ./release.sh
 # One-time: install tooling
 brew install xcodegen
 
-# Every release (GUI path)
+# ✅ Device-free release (Path C) — after creating the "TripForge App Store" profile
+cd TripForgeApp
+TEAM_ID=Y62BAT7CF4 PROFILE_NAME="TripForge App Store" \
+  APPLE_ID="you@example.com" APP_PASSWORD="abcd-efgh-ijkl-mnop" ./release.sh
+
+# Or, if you've registered a device — automatic signing (GUI)
 cd TripForgeApp && xcodegen generate && open TripForge.xcodeproj
 #   → set Team → Any iOS Device → Product > Archive → Distribute > TestFlight
-
-# Every release (script path)
-cd TripForgeApp
-TEAM_ID=ABCDE12345 API_KEY_ID=XXXX API_ISSUER_ID=uuid ./release.sh
 ```
 
-Bundle ID: `com.rajkumar.tripforge` · Min iOS: 17.0 · Devices: iPhone + iPad
+Team ID: `Y62BAT7CF4` · Bundle ID: `com.rajkumar.tripforge` · Min iOS: 17.0 · Devices: iPhone + iPad
