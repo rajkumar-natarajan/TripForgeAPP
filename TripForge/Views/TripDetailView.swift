@@ -69,6 +69,12 @@ struct TripDetailView: View {
                 }.buttonStyle(GhostButtonStyle())
             }
             .padding(.top, 4)
+
+            Button { shareURL = PDFExport.write(for: trip).map(ShareURL.init) } label: {
+                Label("Download PDF / Print", systemImage: "doc.richtext")
+            }
+            .buttonStyle(GhostButtonStyle())
+            .accessibilityIdentifier("downloadPDFButton")
         }
         .padding(18)
         .frame(maxWidth: .infinity, alignment: .leading)

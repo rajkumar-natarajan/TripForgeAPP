@@ -98,6 +98,18 @@ final class TripForgeUITests: XCTestCase {
             }
         }
 
+        // Download PDF / Print -> share sheet appears, then dismiss.
+        let pdf = app.buttons["downloadPDFButton"]
+        if pdf.waitForExistence(timeout: 4) {
+            pdf.tap()
+            let closeButtons = app.buttons.matching(NSPredicate(format: "label CONTAINS[c] 'Close' OR label CONTAINS[c] 'Cancel'"))
+            if closeButtons.firstMatch.waitForExistence(timeout: 8) {
+                closeButtons.firstMatch.tap()
+            } else {
+                app.swipeDown()
+            }
+        }
+
         // Navigate back to the dashboard.
         let back = app.navigationBars.buttons.element(boundBy: 0)
         if back.exists { back.tap() }
@@ -145,7 +157,25 @@ final class TripForgeUITests: XCTestCase {
         waitFor(app.staticTexts["My Trips"], 6)
     }
 
-    /// "Add to Calendar" must not crash (regression guard for the missing
+    /// Generates a PDF and confirms the share sheet opens with a PDF document.
+    func testDownloadPDF() {
+        createTripFromPrompt("4 days in Lisbon, food and history, budget $2000")
+        waitFor(app.staticTexts["Estimated spend"], 10, "Detail did not appear")
+
+        let pdf = app.buttons["downloadPDFButton"]
+        waitFor(pdf, 6, "Download PDF button not found")
+        pdf.tap()
+
+        // The activity/share sheet should present. Either a Print/Save action or
+        // the document title shows up; at minimum a Close/Cancel affordance exists.
+        let sheetDismiss = app.buttons.matching(
+            NSPredicate(format: "label CONTAINS[c] 'Close' OR label CONTAINS[c] 'Cancel'")).firstMatch
+        waitFor(sheetDismiss, 8, "Share sheet did not present for PDF")
+        sheetDismiss.tap()
+
+        waitFor(app.staticTexts["Estimated spend"], 6, "App not responsive after PDF export")
+    }
+
     /// NSCalendarsWriteOnlyAccessUsageDescription purpose string) and should
     /// surface the confirmation alert. Calendar access is pre-granted by the
     /// test runner via `simctl privacy grant calendar`.

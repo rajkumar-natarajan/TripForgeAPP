@@ -22,6 +22,7 @@ lists, and one-tap **Apple Calendar** export.
 - 🧠 **On-device planner** — a deterministic Swift engine with a curated bank of real places (Tokyo, Paris, New York, Rome, Barcelona, Bali) plus a smart generic planner for anywhere else. No network required.
 - 🗺️ **Native MapKit** — every day's stops pinned and routed on a real map, with one-tap "Open route in Maps" walking directions. **No Google Maps key needed.**
 - 📅 **Apple Calendar export** — add your whole itinerary to the system calendar via **EventKit** (with 30-min reminders), or share a universal `.ics` file.
+- 📄 **Download PDF / Print** — export a beautifully formatted, paginated itinerary (cover header, day-by-day schedule, weather, costs, and packing checklist) and save it to Files, print it, or share it — via the native share sheet.
 - 💰 **Budget tracking**, 🎒 **auto packing lists**, ✅ **templates** (Honeymoon / Solo / Family / Foodie).
 - ✏️ **Editable itinerary** — reorder, add, and remove activities; check off packing items.
 - 💾 **Private by design** — trips persist to a local JSON file in the app's Documents directory.
@@ -127,7 +128,8 @@ TripForgeApp/
     │   └── Utils.swift             # Dates, money, constants, templates
     ├── Store/
     │   ├── TripStore.swift         # State + JSON persistence + coerceInput
-    │   └── CalendarExport.swift    # EventKit + .ics generation
+    │   ├── CalendarExport.swift    # EventKit + .ics generation
+    │   └── PDFExport.swift         # Paginated, print-ready itinerary PDF
     ├── Theme/Theme.swift           # Brand colors + button/card styles
     └── Views/
         ├── RootView.swift
