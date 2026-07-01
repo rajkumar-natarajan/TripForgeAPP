@@ -106,8 +106,8 @@ struct DashboardView: View {
                     Button { template = tpl } label: {
                         VStack(alignment: .leading, spacing: 8) {
                             Text(tpl.emoji).font(.system(size: 30))
-                            Text(tpl.name).font(.headline)
-                            Text(tpl.description).font(.caption).foregroundStyle(.secondary)
+                            Text(LocalizedStringKey(tpl.name)).font(.headline)
+                            Text(LocalizedStringKey(tpl.description)).font(.caption).foregroundStyle(.secondary)
                                 .fixedSize(horizontal: false, vertical: true)
                         }
                         .frame(maxWidth: .infinity, minHeight: 140, alignment: .topLeading)

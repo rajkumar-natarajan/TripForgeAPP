@@ -63,7 +63,7 @@ enum CalendarExport {
             }
             guard granted else {
                 return .failure(NSError(domain: "TripForge", code: 1,
-                    userInfo: [NSLocalizedDescriptionKey: "Calendar access was denied. You can enable it in Settings."]))
+                    userInfo: [NSLocalizedDescriptionKey: String(localized: "Calendar access was denied. You can enable it in Settings.")]))
             }
             var count = 0
             for day in trip.days {

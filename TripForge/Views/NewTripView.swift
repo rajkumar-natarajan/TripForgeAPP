@@ -25,9 +25,9 @@ struct NewTripView: View {
     var template: TripTemplate?
 
     private let examples = [
-        "5 days in Tokyo in mid July with my wife, love food and anime, budget $3000",
-        "A relaxed long weekend in Paris for 2, art and cafes, €1200",
-        "7-day family trip to Bali, beaches and nature"
+        String(localized: "5 days in Tokyo in mid July with my wife, love food and anime, budget $3000"),
+        String(localized: "A relaxed long weekend in Paris for 2, art and cafes, €1200"),
+        String(localized: "7-day family trip to Bali, beaches and nature")
     ]
 
     var body: some View {
@@ -143,7 +143,7 @@ struct NewTripView: View {
             field("Interests") {
                 FlowLayout(spacing: 8) {
                     ForEach(Constants.interestOptions, id: \.self) { i in
-                        Button { toggle(&interests, i) } label: { Chip(label: i, selected: interests.contains(i)) }
+                        Button { toggle(&interests, i) } label: { Chip(label: Loc.interest(i), selected: interests.contains(i)) }
                             .buttonStyle(.plain)
                     }
                 }
@@ -151,7 +151,7 @@ struct NewTripView: View {
             field("Dietary needs") {
                 FlowLayout(spacing: 8) {
                     ForEach(Constants.dietaryOptions, id: \.self) { d in
-                        Button { toggle(&dietary, d) } label: { Chip(label: d, selected: dietary.contains(d)) }
+                        Button { toggle(&dietary, d) } label: { Chip(label: Loc.dietary(d), selected: dietary.contains(d)) }
                             .buttonStyle(.plain)
                     }
                 }
@@ -181,7 +181,7 @@ struct NewTripView: View {
                         : destination.trimmingCharacters(in: .whitespaces).count > 1
     }
 
-    private func field<Content: View>(_ label: String, @ViewBuilder _ content: () -> Content) -> some View {
+    private func field<Content: View>(_ label: LocalizedStringKey, @ViewBuilder _ content: () -> Content) -> some View {
         VStack(alignment: .leading, spacing: 6) {
             Text(label).font(.caption.weight(.medium)).foregroundStyle(.secondary)
             content()

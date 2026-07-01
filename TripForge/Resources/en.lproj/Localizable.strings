@@ -1,0 +1,143 @@
+/* TripForge — English (base) localization */
+
+/* Activity types */
+"Attraction" = "Attraction";
+"Food" = "Food";
+"Café" = "Café";
+"Hidden Gem" = "Hidden Gem";
+"Transport" = "Transport";
+"Stay" = "Stay";
+"Shopping" = "Shopping";
+"Nature" = "Nature";
+"Nightlife" = "Nightlife";
+"Other" = "Other";
+
+/* Travel styles */
+"style.budget" = "Budget";
+"style.balanced" = "Balanced";
+"style.luxury" = "Luxury";
+"style.adventure" = "Adventure";
+"style.relaxed" = "Relaxed";
+"style.cultural" = "Cultural";
+
+/* Pace */
+"pace.chill" = "Chill";
+"pace.moderate" = "Moderate";
+"pace.packed" = "Packed";
+"%lld stops/day" = "%lld stops/day";
+
+/* Interests */
+"interest.food" = "Food";
+"interest.history" = "History";
+"interest.art" = "Art";
+"interest.nature" = "Nature";
+"interest.nightlife" = "Nightlife";
+"interest.shopping" = "Shopping";
+"interest.architecture" = "Architecture";
+"interest.anime" = "Anime";
+"interest.music" = "Music";
+"interest.beaches" = "Beaches";
+"interest.hiking" = "Hiking";
+"interest.photography" = "Photography";
+"interest.coffee" = "Coffee";
+"interest.museums" = "Museums";
+"interest.romance" = "Romance";
+
+/* Dietary needs */
+"diet.vegetarian" = "Vegetarian";
+"diet.vegan" = "Vegan";
+"diet.halal" = "Halal";
+"diet.kosher" = "Kosher";
+"diet.gluten-free" = "Gluten-free";
+"diet.no restrictions" = "No restrictions";
+
+/* Templates */
+"Honeymoon" = "Honeymoon";
+"Solo Adventure" = "Solo Adventure";
+"Family Trip" = "Family Trip";
+"Foodie Tour" = "Foodie Tour";
+"Romantic, unhurried, memorable moments for two." = "Romantic, unhurried, memorable moments for two.";
+"Spontaneous, budget-savvy, off the beaten path." = "Spontaneous, budget-savvy, off the beaten path.";
+"Kid-friendly, balanced, plenty of downtime." = "Kid-friendly, balanced, plenty of downtime.";
+"Eat your way through the city, one bite at a time." = "Eat your way through the city, one bite at a time.";
+
+/* Dashboard */
+"My Trips" = "My Trips";
+"Your planned adventures, saved on this device." = "Your planned adventures, saved on this device.";
+"No trips yet" = "No trips yet";
+"Start with a template below, or plan from scratch." = "Start with a template below, or plan from scratch.";
+"Plan your first trip" = "Plan your first trip";
+"Start from a template" = "Start from a template";
+"Delete" = "Delete";
+"New trip" = "New trip";
+"%lld days" = "%lld days";
+
+/* New trip */
+"Plan a new trip" = "Plan a new trip";
+"Cancel" = "Cancel";
+"Describe" = "Describe";
+"Smart form" = "Smart form";
+"Tell us about your trip" = "Tell us about your trip";
+"e.g. 5 days in Tokyo in mid July with my wife, love food and anime, budget $3000" = "e.g. 5 days in Tokyo in mid July with my wife, love food and anime, budget $3000";
+"Try an example" = "Try an example";
+"5 days in Tokyo in mid July with my wife, love food and anime, budget $3000" = "5 days in Tokyo in mid July with my wife, love food and anime, budget $3000";
+"A relaxed long weekend in Paris for 2, art and cafes, €1200" = "A relaxed long weekend in Paris for 2, art and cafes, €1200";
+"7-day family trip to Bali, beaches and nature" = "7-day family trip to Bali, beaches and nature";
+"Destination" = "Destination";
+"Tokyo, Paris, Bali…" = "Tokyo, Paris, Bali…";
+"Start" = "Start";
+"End" = "End";
+"Travelers" = "Travelers";
+"Budget" = "Budget";
+"Currency" = "Currency";
+"Travel style" = "Travel style";
+"Pace" = "Pace";
+"Interests" = "Interests";
+"Dietary needs" = "Dietary needs";
+"Designing your itinerary…" = "Designing your itinerary…";
+"Generate itinerary" = "Generate itinerary";
+"Built-in offline planner — always free, no keys needed." = "Built-in offline planner — always free, no keys needed.";
+
+/* Trip detail */
+"Calendar" = "Calendar";
+"OK" = "OK";
+"Add to Calendar" = "Add to Calendar";
+"Export .ics" = "Export .ics";
+"Download PDF / Print" = "Download PDF / Print";
+"Estimated spend" = "Estimated spend";
+"Over budget by %@. Consider trimming a few paid activities." = "Over budget by %@. Consider trimming a few paid activities.";
+"Day %lld" = "Day %lld";
+"No activities yet for this day." = "No activities yet for this day.";
+"Add activity" = "Add activity";
+"Original request" = "Original request";
+"Packing list" = "Packing list";
+"Trip not found" = "Trip not found";
+"It may have been deleted." = "It may have been deleted.";
+"Remove" = "Remove";
+"Added %lld events to your calendar." = "Added %lld events to your calendar.";
+
+/* Add activity form */
+"Details" = "Details";
+"Title" = "Title";
+"Type" = "Type";
+"Location" = "Location";
+"Start time" = "Start time";
+"Duration: %lld min" = "Duration: %lld min";
+"Cost" = "Cost";
+"Notes / description" = "Notes / description";
+"Add" = "Add";
+
+/* Map */
+"Open route in Maps" = "Open route in Maps";
+
+/* Calendar export */
+"Calendar access was denied. You can enable it in Settings." = "Calendar access was denied. You can enable it in Settings.";
+
+/* PDF export */
+"%lld travelers" = "%lld travelers";
+"Budget %@" = "Budget %@";
+"Est. spend %@" = "Est. spend %@";
+"Interests:" = "Interests:";
+"No activities planned." = "No activities planned.";
+"Day %lld — %@" = "Day %lld — %@";
+"Made with TripForge · Page %lld" = "Made with TripForge · Page %lld";

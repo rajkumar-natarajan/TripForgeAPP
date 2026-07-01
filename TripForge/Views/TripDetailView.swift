@@ -224,7 +224,7 @@ struct TripDetailView: View {
     private func addToCalendar(_ trip: Trip) async {
         let result = await CalendarExport.addToCalendar(trip)
         switch result {
-        case .success(let count): calendarMessage = "Added \(count) events to your calendar."
+        case .success(let count): calendarMessage = String(localized: "Added \(count) events to your calendar.")
         case .failure(let err): calendarMessage = err.localizedDescription
         }
         showCalendarAlert = true

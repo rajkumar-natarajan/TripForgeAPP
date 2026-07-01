@@ -4,6 +4,7 @@ options:
   deploymentTarget:
     iOS: "17.0"
   createIntermediateGroups: true
+  developmentRegion: en
 configs:
   Debug: debug
   Release: release
@@ -30,6 +31,11 @@ targets:
         CFBundleShortVersionString: "$(MARKETING_VERSION)"
         CFBundleVersion: "$(CURRENT_PROJECT_VERSION)"
         CFBundleDisplayName: TripForge
+        CFBundleDevelopmentRegion: en
+        CFBundleLocalizations:
+          - en
+          - fr
+          - es
         UIUserInterfaceStyle: Dark
         NSCalendarsUsageDescription: "TripForge adds your itinerary events to your calendar."
         NSCalendarsFullAccessUsageDescription: "TripForge adds your itinerary events to your calendar."

@@ -25,16 +25,16 @@ enum ActivityType: String, Codable, CaseIterable, Identifiable {
 
     var label: String {
         switch self {
-        case .attraction: return "Attraction"
-        case .food: return "Food"
-        case .cafe: return "Café"
-        case .hiddenGem: return "Hidden Gem"
-        case .transport: return "Transport"
-        case .hotel: return "Stay"
-        case .shopping: return "Shopping"
-        case .nature: return "Nature"
-        case .nightlife: return "Nightlife"
-        case .other: return "Other"
+        case .attraction: return String(localized: "Attraction")
+        case .food: return String(localized: "Food")
+        case .cafe: return String(localized: "Café")
+        case .hiddenGem: return String(localized: "Hidden Gem")
+        case .transport: return String(localized: "Transport")
+        case .hotel: return String(localized: "Stay")
+        case .shopping: return String(localized: "Shopping")
+        case .nature: return String(localized: "Nature")
+        case .nightlife: return String(localized: "Nightlife")
+        case .other: return String(localized: "Other")
         }
     }
 }
@@ -42,13 +42,13 @@ enum ActivityType: String, Codable, CaseIterable, Identifiable {
 enum TravelStyle: String, Codable, CaseIterable, Identifiable {
     case budget, balanced, luxury, adventure, relaxed, cultural
     var id: String { rawValue }
-    var label: String { rawValue.capitalized }
+    var label: String { String(localized: LocalizedStringResource(stringLiteral: "style.\(rawValue)")) }
 }
 
 enum Pace: String, Codable, CaseIterable, Identifiable {
     case chill, moderate, packed
     var id: String { rawValue }
-    var label: String { rawValue.capitalized }
+    var label: String { String(localized: LocalizedStringResource(stringLiteral: "pace.\(rawValue)")) }
     var activitiesPerDay: Int {
         switch self {
         case .chill: return 3
@@ -56,7 +56,7 @@ enum Pace: String, Codable, CaseIterable, Identifiable {
         case .packed: return 5
         }
     }
-    var hint: String { "\(activitiesPerDay) stops/day" }
+    var hint: String { String(localized: "\(activitiesPerDay) stops/day") }
 }
 
 // MARK: - Core models

@@ -50,7 +50,7 @@ enum PDFExport {
                 page.ensureSpace(64)
                 drawDayHeader(day, index: i, on: &page)
                 if day.activities.isEmpty {
-                    page.drawParagraph("No activities planned.", font: .italicSystemFont(ofSize: 11),
+                    page.drawParagraph(String(localized: "No activities planned."), font: .italicSystemFont(ofSize: 11),
                                        color: subtle)
                 }
                 for act in day.activities {
@@ -62,7 +62,7 @@ enum PDFExport {
             if !trip.packingList.isEmpty {
                 page.ensureSpace(60)
                 page.advance(6)
-                page.drawSectionTitle("Packing list")
+                page.drawSectionTitle(String(localized: "Packing list"))
                 drawPackingList(trip.packingList, on: &page)
             }
         }
@@ -86,16 +86,17 @@ enum PDFExport {
 
         let meta = [
             DateUtils.rangeLabel(trip.startDate, trip.endDate),
-            "\(trip.travelers) traveler\(trip.travelers == 1 ? "" : "s")",
-            "\(trip.days.count) day\(trip.days.count == 1 ? "" : "s")",
-            "Budget \(Money.format(trip.budget, trip.currency))",
-            "Est. spend \(Money.format(trip.totalCost, trip.currency))"
+            String(localized: "\(trip.travelers) travelers"),
+            String(localized: "\(trip.days.count) days"),
+            String(localized: "Budget \(Money.format(trip.budget, trip.currency))"),
+            String(localized: "Est. spend \(Money.format(trip.totalCost, trip.currency))")
         ].joined(separator: "   •   ")
         page.drawParagraph(meta, font: uiFont(11, .regular), color: subtle)
 
         if !trip.interests.isEmpty {
             page.advance(2)
-            page.drawParagraph("Interests: " + trip.interests.joined(separator: ", "),
+            let list = trip.interests.map { Loc.interest($0) }.joined(separator: ", ")
+            page.drawParagraph(String(localized: "Interests:") + " " + list,
                                font: uiFont(10, .regular), color: subtle)
         }
         page.advance(10)
@@ -104,7 +105,7 @@ enum PDFExport {
     }
 
     private static func drawDayHeader(_ day: Day, index: Int, on page: inout PageCursor) {
-        let title = "Day \(index + 1) — \(DateUtils.dayLabel(day.date))"
+        let title = String(localized: "Day \(index + 1) — \(DateUtils.dayLabel(day.date))")
         page.drawRuns([(title, uiFont(15, .bold), ink)])
         if let w = day.weather {
             page.appendRight("\(w.emoji)  \(w.high)° / \(w.low)°", font: uiFont(11, .regular), color: subtle)
@@ -290,7 +291,7 @@ private struct PageCursor {
     }
 
     private func drawFooter() {
-        let text = "Made with TripForge · Page \(pageNumber)"
+        let text = String(localized: "Made with TripForge · Page \(pageNumber)")
         let attrs: [NSAttributedString.Key: Any] = [
             .font: UIFont.systemFont(ofSize: 9, weight: .regular),
             .foregroundColor: UIColor(white: 0.6, alpha: 1)

@@ -74,6 +74,18 @@ enum Money {
     }
 }
 
+/// Localized display strings for data values (interests, dietary needs) that are
+/// stored in their raw English form but shown translated.
+enum Loc {
+    static func interest(_ raw: String) -> String {
+        NSLocalizedString("interest.\(raw)", value: raw, comment: "Interest option")
+    }
+    static func dietary(_ raw: String) -> String {
+        NSLocalizedString("diet.\(raw)", value: raw, comment: "Dietary option")
+    }
+}
+
+
 enum Constants {
     static let interestOptions = [
         "food", "history", "art", "nature", "nightlife", "shopping", "architecture",

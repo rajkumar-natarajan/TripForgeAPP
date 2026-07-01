@@ -24,6 +24,7 @@ lists, and one-tap **Apple Calendar** export.
 - 📅 **Apple Calendar export** — add your whole itinerary to the system calendar via **EventKit** (with 30-min reminders), or share a universal `.ics` file.
 - 📄 **Download PDF / Print** — export a beautifully formatted, paginated itinerary (cover header, day-by-day schedule, weather, costs, and packing checklist) and save it to Files, print it, or share it — via the native share sheet.
 - 💰 **Budget tracking**, 🎒 **auto packing lists**, ✅ **templates** (Honeymoon / Solo / Family / Foodie).
+- 🌍 **Multilingual** — full UI localization in **English, French, and Spanish** (follows the device language automatically).
 - ✏️ **Editable itinerary** — reorder, add, and remove activities; check off packing items.
 - 💾 **Private by design** — trips persist to a local JSON file in the app's Documents directory.
 

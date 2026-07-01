@@ -1,0 +1,143 @@
+/* TripForge — Français (French) localization */
+
+/* Activity types */
+"Attraction" = "Attraction";
+"Food" = "Cuisine";
+"Café" = "Café";
+"Hidden Gem" = "Trésor caché";
+"Transport" = "Transport";
+"Stay" = "Hébergement";
+"Shopping" = "Shopping";
+"Nature" = "Nature";
+"Nightlife" = "Vie nocturne";
+"Other" = "Autre";
+
+/* Travel styles */
+"style.budget" = "Économique";
+"style.balanced" = "Équilibré";
+"style.luxury" = "Luxe";
+"style.adventure" = "Aventure";
+"style.relaxed" = "Détente";
+"style.cultural" = "Culturel";
+
+/* Pace */
+"pace.chill" = "Tranquille";
+"pace.moderate" = "Modéré";
+"pace.packed" = "Chargé";
+"%lld stops/day" = "%lld arrêts/jour";
+
+/* Interests */
+"interest.food" = "Cuisine";
+"interest.history" = "Histoire";
+"interest.art" = "Art";
+"interest.nature" = "Nature";
+"interest.nightlife" = "Vie nocturne";
+"interest.shopping" = "Shopping";
+"interest.architecture" = "Architecture";
+"interest.anime" = "Anime";
+"interest.music" = "Musique";
+"interest.beaches" = "Plages";
+"interest.hiking" = "Randonnée";
+"interest.photography" = "Photographie";
+"interest.coffee" = "Café";
+"interest.museums" = "Musées";
+"interest.romance" = "Romance";
+
+/* Dietary needs */
+"diet.vegetarian" = "Végétarien";
+"diet.vegan" = "Végétalien";
+"diet.halal" = "Halal";
+"diet.kosher" = "Casher";
+"diet.gluten-free" = "Sans gluten";
+"diet.no restrictions" = "Aucune restriction";
+
+/* Templates */
+"Honeymoon" = "Lune de miel";
+"Solo Adventure" = "Aventure en solo";
+"Family Trip" = "Voyage en famille";
+"Foodie Tour" = "Tour gastronomique";
+"Romantic, unhurried, memorable moments for two." = "Des moments romantiques, sans hâte et mémorables à deux.";
+"Spontaneous, budget-savvy, off the beaten path." = "Spontané, économique et hors des sentiers battus.";
+"Kid-friendly, balanced, plenty of downtime." = "Adapté aux enfants, équilibré, avec beaucoup de temps libre.";
+"Eat your way through the city, one bite at a time." = "Découvrez la ville à travers sa cuisine, une bouchée à la fois.";
+
+/* Dashboard */
+"My Trips" = "Mes voyages";
+"Your planned adventures, saved on this device." = "Vos aventures planifiées, enregistrées sur cet appareil.";
+"No trips yet" = "Aucun voyage pour l'instant";
+"Start with a template below, or plan from scratch." = "Commencez avec un modèle ci-dessous ou planifiez à partir de zéro.";
+"Plan your first trip" = "Planifiez votre premier voyage";
+"Start from a template" = "Commencer avec un modèle";
+"Delete" = "Supprimer";
+"New trip" = "Nouveau voyage";
+"%lld days" = "%lld jours";
+
+/* New trip */
+"Plan a new trip" = "Planifier un nouveau voyage";
+"Cancel" = "Annuler";
+"Describe" = "Décrire";
+"Smart form" = "Formulaire intelligent";
+"Tell us about your trip" = "Parlez-nous de votre voyage";
+"e.g. 5 days in Tokyo in mid July with my wife, love food and anime, budget $3000" = "ex. 5 jours à Tokyo mi-juillet avec ma femme, on adore la cuisine et les animés, budget 3000 $";
+"Try an example" = "Essayez un exemple";
+"5 days in Tokyo in mid July with my wife, love food and anime, budget $3000" = "5 jours à Tokyo mi-juillet avec ma femme, on adore la cuisine et les animés, budget 3000 $";
+"A relaxed long weekend in Paris for 2, art and cafes, €1200" = "Un long week-end détente à Paris pour 2, art et cafés, 1200 €";
+"7-day family trip to Bali, beaches and nature" = "Voyage en famille de 7 jours à Bali, plages et nature";
+"Destination" = "Destination";
+"Tokyo, Paris, Bali…" = "Tokyo, Paris, Bali…";
+"Start" = "Début";
+"End" = "Fin";
+"Travelers" = "Voyageurs";
+"Budget" = "Budget";
+"Currency" = "Devise";
+"Travel style" = "Style de voyage";
+"Pace" = "Rythme";
+"Interests" = "Centres d'intérêt";
+"Dietary needs" = "Régime alimentaire";
+"Designing your itinerary…" = "Conception de votre itinéraire…";
+"Generate itinerary" = "Générer l'itinéraire";
+"Built-in offline planner — always free, no keys needed." = "Planificateur hors ligne intégré — toujours gratuit, sans clé.";
+
+/* Trip detail */
+"Calendar" = "Calendrier";
+"OK" = "OK";
+"Add to Calendar" = "Ajouter au calendrier";
+"Export .ics" = "Exporter .ics";
+"Download PDF / Print" = "Télécharger le PDF / Imprimer";
+"Estimated spend" = "Dépense estimée";
+"Over budget by %@. Consider trimming a few paid activities." = "Dépassement du budget de %@. Pensez à réduire quelques activités payantes.";
+"Day %lld" = "Jour %lld";
+"No activities yet for this day." = "Aucune activité prévue pour ce jour.";
+"Add activity" = "Ajouter une activité";
+"Original request" = "Demande initiale";
+"Packing list" = "Liste d'affaires";
+"Trip not found" = "Voyage introuvable";
+"It may have been deleted." = "Il a peut-être été supprimé.";
+"Remove" = "Retirer";
+"Added %lld events to your calendar." = "%lld événements ajoutés à votre calendrier.";
+
+/* Add activity form */
+"Details" = "Détails";
+"Title" = "Titre";
+"Type" = "Type";
+"Location" = "Lieu";
+"Start time" = "Heure de début";
+"Duration: %lld min" = "Durée : %lld min";
+"Cost" = "Coût";
+"Notes / description" = "Notes / description";
+"Add" = "Ajouter";
+
+/* Map */
+"Open route in Maps" = "Ouvrir l'itinéraire dans Plans";
+
+/* Calendar export */
+"Calendar access was denied. You can enable it in Settings." = "L'accès au calendrier a été refusé. Vous pouvez l'activer dans Réglages.";
+
+/* PDF export */
+"%lld travelers" = "%lld voyageurs";
+"Budget %@" = "Budget %@";
+"Est. spend %@" = "Dépense est. %@";
+"Interests:" = "Centres d'intérêt :";
+"No activities planned." = "Aucune activité prévue.";
+"Day %lld — %@" = "Jour %lld — %@";
+"Made with TripForge · Page %lld" = "Créé avec TripForge · Page %lld";
