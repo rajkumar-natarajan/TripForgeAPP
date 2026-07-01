@@ -15,7 +15,7 @@ settings:
     SWIFT_VERSION: "5.0"
     # Set your Apple Developer Team ID here (or pass DEVELOPMENT_TEAM=XXXXXXXXXX
     # on the xcodebuild command line) to enable signing for device/TestFlight builds.
-    DEVELOPMENT_TEAM: ""
+    DEVELOPMENT_TEAM: "Y62BAT7CF4"
 targets:
   TripForge:
     type: application
@@ -40,6 +40,8 @@ targets:
           CODE_SIGNING_ALLOWED: "NO"
           CODE_SIGN_IDENTITY: ""
         # Device / Archive / TestFlight: automatic signing.
+        # Open the project in Xcode (signed into your Apple ID) and Archive —
+        # Xcode will create the App Store distribution profile for you.
         Release:
           CODE_SIGN_STYLE: Automatic
           CODE_SIGNING_REQUIRED: "YES"

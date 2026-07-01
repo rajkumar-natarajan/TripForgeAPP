@@ -11,6 +11,23 @@ Both paths produce the same result: a signed build in App Store Connect → Test
 
 ---
 
+## ✅ This Mac is already set up (verified)
+
+A signing check on this machine confirmed:
+
+| Item | Status |
+|---|---|
+| **Paid Apple Developer Program** | ✅ Yes — an *Apple Distribution* certificate exists (only issuable to paid members) |
+| **Team ID** | ✅ `Y62BAT7CF4` (Rajkumar Natarajan) — already baked into `project.yml` |
+| **Apple Distribution certificate** | ✅ Valid through **Dec 24, 2026** |
+| **Apple Development certificates** | ✅ 2 present |
+| **Xcode** | ✅ 26.5 |
+| **App icon** | ✅ Bundled |
+
+**One gotcha to know:** this team currently has **no registered devices**, and no iPhone/iPad is connected to this Mac. Apple's *automatic* signing tries to make a **Development** profile first, which requires at least one registered device — so a headless `xcodebuild archive` fails with *"Your team has no devices…"*. The fix is simple and is handled cleanly by the **Xcode GUI path below** (Xcode creates the **App Store distribution** profile, which needs no device). If you prefer the CLI, first register one device (Path B, step B0).
+
+---
+
 ## 0. What you need before you start
 
 | Requirement | Notes |
@@ -60,22 +77,9 @@ You now have an empty App record. Builds you upload will show up under its **Tes
 
 ## 3. Set your signing team in the project
 
-The project ships **unsigned** so it builds on the simulator with zero setup. For a device/TestFlight build you must tell it your Team ID. Pick **one**:
-
-**Option 1 — Xcode GUI (easiest):** do it in Path A, step 2 below (just tick a checkbox and choose your team).
-
-**Option 2 — Bake it into `project.yml`:** edit the `DEVELOPMENT_TEAM` line and regenerate:
-
-```yaml
-settings:
-  base:
-    DEVELOPMENT_TEAM: "ABCDE12345"   # <-- your Team ID
-```
-```bash
-xcodegen generate
-```
-
-**Option 3 — Pass it on the command line:** `TEAM_ID=ABCDE12345 ./release.sh` (Path B) — no file edits needed.
+✅ **Already done** — your Team ID `Y62BAT7CF4` is baked into `project.yml`
+(`DEVELOPMENT_TEAM: "Y62BAT7CF4"`). If you ever switch Apple accounts, edit that line
+and run `xcodegen generate`, or pass `TEAM_ID=... ./release.sh`.
 
 ---
 
@@ -129,6 +133,19 @@ open TripForge.xcodeproj
 ## Path B — Upload from the command line (`release.sh`)
 
 Once you've done step 1–2 (App ID + App record) once, you can skip Xcode entirely.
+
+### B0. Register at least one device (one‑time, required for CLI signing)
+
+Because this team has no registered devices, the CLI's automatic signing can't create a
+provisioning profile. Do **one** of:
+
+- **Plug in an iPhone/iPad**, open Xcode → **Window ▸ Devices and Simulators**, select it, and
+  click **Use for Development** (this registers its UDID). Then re‑run `release.sh`. — *or* —
+- Manually add a device UDID at
+  <https://developer.apple.com/account/resources/devices/list> (**➕**, paste any device's UDID).
+
+> The **Xcode GUI path (Path A)** avoids this entirely — it creates an App Store distribution
+> profile that needs no device. Prefer Path A for the very first release.
 
 ### B1. Get upload credentials (choose one)
 
