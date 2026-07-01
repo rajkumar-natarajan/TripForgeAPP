@@ -82,8 +82,9 @@ EMBEDDED="$ARCHIVED_APP/embedded.mobileprovision"
 if [[ -f "$EMBEDDED" ]]; then
   PROF_DIR="$HOME/Library/MobileDevice/Provisioning Profiles"
   mkdir -p "$PROF_DIR"
-  PROF_UUID=$(security cms -D -i "$EMBEDDED" 2>/dev/null \
-    | /usr/libexec/PlistBuddy -c "Print :UUID" /dev/stdin 2>/dev/null)
+  PROF_UUID=$(security cms -D -i "$EMBEDDED" -o /tmp/tf_embedded.plist 2>/dev/null \
+    && /usr/libexec/PlistBuddy -c "Print :UUID" /tmp/tf_embedded.plist 2>/dev/null)
+  rm -f /tmp/tf_embedded.plist
   if [[ -n "$PROF_UUID" ]]; then
     cp "$EMBEDDED" "$PROF_DIR/$PROF_UUID.mobileprovision"
     echo "    installed profile $PROF_UUID"
