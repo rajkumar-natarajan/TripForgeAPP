@@ -68,6 +68,24 @@ xcrun simctl launch booted com.rajkumar.tripforge
 
 ---
 
+## 📦 Ship it to TestFlight
+
+Ready to put TripForge on real devices for beta testers? See the full step‑by‑step
+**[TestFlight deployment guide → `TESTFLIGHT.md`](TESTFLIGHT.md)**.
+
+It covers both the **Xcode GUI** path and a scripted **command‑line** path
+([`release.sh`](release.sh)): registering the App ID, creating the App Store Connect record,
+code signing, archiving, exporting a signed `.ipa`, and inviting testers.
+
+```bash
+# Scripted release (after one-time App Store Connect setup):
+TEAM_ID=ABCDE12345 API_KEY_ID=XXXX API_ISSUER_ID=<uuid> ./release.sh
+```
+
+> Requires a **paid Apple Developer Program** membership ($99/yr) — TestFlight isn't available on the free tier.
+
+---
+
 ## 🏗️ Architecture
 
 ```
