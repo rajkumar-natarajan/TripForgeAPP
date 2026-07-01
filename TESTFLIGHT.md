@@ -195,7 +195,7 @@ BUILD_NUMBER=$(date +%s) MARKETING_VERSION=1.0.1 TEAM_ID=... ./release.sh
 | **"Failed to register bundle identifier"** | The bundle id is taken on another account, or the App ID wasn't created. Do step 1, or change `PRODUCT_BUNDLE_IDENTIFIER` in `project.yml` to something unique like `com.<you>.tripforge`. |
 | **Build stuck on "Processing" for hours** | Usually clears within 15 min; if it fails you'll get an email. Re‑upload with a new build number. |
 | **"Missing Compliance" every upload** | Add `INFOPLIST_KEY_ITSAppUsesNonExemptEncryption: "NO"` under the target's `settings.base` in `project.yml`, then regenerate. (Only valid because TripForge uses no non‑standard crypto.) |
-| **Icon/asset warnings** | This build uses a generated launch screen and system styling. Add an `Assets.xcassets` **AppIcon** set before public External testing for a polished look (not required for Internal testing). |
+| **Icon/asset warnings** | The app already ships a branded **AppIcon** (`TripForge/Assets.xcassets/AppIcon.appiconset`, a single 1024px universal icon that Xcode down-scales). To customize it, replace `AppIcon-1024.png` and rebuild. |
 | **`xcodegen: command not found`** | `brew install xcodegen`. |
 
 ---
