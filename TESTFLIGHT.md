@@ -248,6 +248,7 @@ BUILD_NUMBER=$(date +%s) MARKETING_VERSION=1.0.1 TEAM_ID=... ./release.sh
 
 | Symptom | Fix |
 |---|---|
+| **`exportArchive`: "No profiles for 'com.rajkumar.tripforge' were found"** | The **archive succeeded** but Xcode didn't copy the profile into `~/Library/MobileDevice/Provisioning Profiles/` (common on Xcode 16+). The archived `.app` already embeds the right profile — install it and re‑export: `cp "<archive>/Products/Applications/TripForge.app/embedded.mobileprovision" ~/Library/MobileDevice/Provisioning\ Profiles/`, then run `./upload.sh` on the exported `.ipa`. **`release.sh` now does this automatically.** |
 | **"Archive" is greyed out** | Select **Any iOS Device (arm64)** as the destination, not a Simulator. |
 | **"No account for team / no signing certificate"** | Add your Apple ID in **Xcode → Settings → Accounts**, then re‑select the Team in Signing & Capabilities. |
 | **"Failed to register bundle identifier"** | The bundle id is taken on another account, or the App ID wasn't created. Do step 1, or change `PRODUCT_BUNDLE_IDENTIFIER` in `project.yml` to something unique like `com.<you>.tripforge`. |
@@ -272,6 +273,9 @@ TEAM_ID=Y62BAT7CF4 PROFILE_NAME="TripForge App Store" \
 # Or, if you've registered a device — automatic signing (GUI)
 cd TripForgeApp && xcodegen generate && open TripForge.xcodeproj
 #   → set Team → Any iOS Device → Product > Archive → Distribute > TestFlight
+
+# Already have a signed .ipa (e.g. build/export/TripForge.ipa)? Just upload it:
+APPLE_ID="you@example.com" APP_PASSWORD="abcd-efgh-ijkl-mnop" ./upload.sh
 ```
 
 Team ID: `Y62BAT7CF4` · Bundle ID: `com.rajkumar.tripforge` · Min iOS: 17.0 · Devices: iPhone + iPad

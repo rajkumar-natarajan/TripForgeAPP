@@ -72,12 +72,31 @@ xcodebuild \
   "${SIGN_ARGS[@]}" \
   clean archive
 
+# Newer Xcode doesn't always copy the provisioning profile into
+# ~/Library/MobileDevice/Provisioning Profiles/, which makes -exportArchive fail
+# with "No profiles for '<bundle id>' were found". The archived .app already embeds
+# the exact profile it was signed with, so install that into the standard location.
+echo "==> Ensuring the archive's provisioning profile is installed"
+ARCHIVED_APP=$(find "$ARCHIVE_PATH/Products/Applications" -maxdepth 1 -name '*.app' | head -1)
+EMBEDDED="$ARCHIVED_APP/embedded.mobileprovision"
+if [[ -f "$EMBEDDED" ]]; then
+  PROF_DIR="$HOME/Library/MobileDevice/Provisioning Profiles"
+  mkdir -p "$PROF_DIR"
+  PROF_UUID=$(security cms -D -i "$EMBEDDED" 2>/dev/null \
+    | /usr/libexec/PlistBuddy -c "Print :UUID" /dev/stdin 2>/dev/null)
+  if [[ -n "$PROF_UUID" ]]; then
+    cp "$EMBEDDED" "$PROF_DIR/$PROF_UUID.mobileprovision"
+    echo "    installed profile $PROF_UUID"
+  fi
+fi
+
 echo "==> Preparing ExportOptions.plist with team id"
 sed -e "s/TEAM_ID_HERE/$TEAM_ID/" \
     -e "s/<string>automatic<\/string>/<string>$EXPORT_SIGNING<\/string>/" \
     ExportOptions.plist > build/ExportOptions.plist
 # For manual signing, tell the exporter which profile to use for the bundle id.
 if [[ "$EXPORT_SIGNING" == "manual" ]]; then
+  /usr/libexec/PlistBuddy -c "Add :signingCertificate string Apple Distribution" build/ExportOptions.plist 2>/dev/null || true
   /usr/libexec/PlistBuddy -c "Add :provisioningProfiles dict" build/ExportOptions.plist 2>/dev/null || true
   /usr/libexec/PlistBuddy -c "Add :provisioningProfiles:$BUNDLE_ID string $PROFILE_NAME" build/ExportOptions.plist 2>/dev/null \
     || /usr/libexec/PlistBuddy -c "Set :provisioningProfiles:$BUNDLE_ID $PROFILE_NAME" build/ExportOptions.plist
