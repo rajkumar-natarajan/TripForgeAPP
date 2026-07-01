@@ -255,7 +255,8 @@ BUILD_NUMBER=$(date +%s) MARKETING_VERSION=1.0.1 TEAM_ID=... ./release.sh
 | **"Failed to register bundle identifier"** | The bundle id is taken on another account, or the App ID wasn't created. Do step 1, or change `PRODUCT_BUNDLE_IDENTIFIER` in `project.yml` to something unique like `com.<you>.tripforge`. |
 | **Build stuck on "Processing" for hours** | Usually clears within 15 min; if it fails you'll get an email. Re‑upload with a new build number. |
 | **"Missing Compliance" every upload** | Add `INFOPLIST_KEY_ITSAppUsesNonExemptEncryption: "NO"` under the target's `settings.base` in `project.yml`, then regenerate. (Only valid because TripForge uses no non‑standard crypto.) |
-| **Icon/asset warnings** | The app already ships a branded **AppIcon** (`TripForge/Assets.xcassets/AppIcon.appiconset`, a single 1024px universal icon that Xcode down-scales). To customize it, replace `AppIcon-1024.png` and rebuild. |
+| **App icon not showing in App Store Connect / TestFlight** | App Store Connect displays the icon from the **`ios-marketing` (1024×1024)** rendition of a *successfully processed* build. Two things cause a blank icon: (1) the build you uploaded was **rejected** (e.g. ITMS‑90474) so it never processed — fix the error and re‑upload; (2) the asset catalog had no `ios-marketing` slot. **Both are fixed now**: the app ships a full `AppIcon.appiconset` including an explicit `ios-marketing` 1024 entry (verify with `xcrun assetutil --info <App>/Assets.car \| grep marketing`). Upload the fresh `build/export/TripForge.ipa`; the icon appears once processing finishes (~5–15 min). |
+| **Regenerate the icon** | Edit `Tools/make_icon.py` (the 1024 master) and/or `Tools/make_iconset.py` (all slots + marketing), run `python3 Tools/make_iconset.py`, then `xcodegen generate` and rebuild. |
 | **`xcodegen: command not found`** | `brew install xcodegen`. |
 
 ---
