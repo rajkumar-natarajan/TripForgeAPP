@@ -35,13 +35,22 @@ targets:
         INFOPLIST_KEY_UISupportedInterfaceOrientations: "UIInterfaceOrientationPortrait"
         TARGETED_DEVICE_FAMILY: "1,2"
       configs:
-        # Simulator / local dev: no signing required.
+        # Simulator / local dev: no signing at all.
+        # MANUAL style so Xcode never tries to auto-generate a development
+        # profile (this team has no registered devices, so that always fails).
         Debug:
+          CODE_SIGN_STYLE: Manual
           CODE_SIGNING_ALLOWED: "NO"
+          CODE_SIGNING_REQUIRED: "NO"
           CODE_SIGN_IDENTITY: ""
-        # Device / Archive / TestFlight: automatic signing.
-        # Open the project in Xcode (signed into your Apple ID) and Archive —
-        # Xcode will create the App Store distribution profile for you.
+          PROVISIONING_PROFILE_SPECIFIER: ""
+        # Device / Archive / TestFlight: MANUAL App Store distribution signing.
+        # Needs NO registered device — just install the "TripForge App Store"
+        # provisioning profile (see TESTFLIGHT.md, Path C). Until it's installed,
+        # Xcode shows "profile not found" (harmless) instead of trying to make a
+        # development profile.
         Release:
-          CODE_SIGN_STYLE: Automatic
+          CODE_SIGN_STYLE: Manual
           CODE_SIGNING_REQUIRED: "YES"
+          CODE_SIGN_IDENTITY: "Apple Distribution"
+          PROVISIONING_PROFILE_SPECIFIER: "TripForge App Store"

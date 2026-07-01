@@ -25,11 +25,7 @@ A signing check on this machine confirmed:
 | **Xcode** | ✅ 26.5 |
 | **App icon** | ✅ Bundled |
 
-**One gotcha to know (and its fix):** this team currently has **no registered devices**, and no iPhone/iPad is connected to this Mac. Apple's *automatic* signing tries to make a **Development** profile first, which requires at least one registered device — so both the Xcode GUI and a headless `xcodebuild archive` fail with:
-
-> *Communication with Apple failed: Your team has no devices…* / *No profiles for 'com.rajkumar.tripforge' were found.*
-
-✅ **The fix that needs no device:** use a **manual App Store distribution profile** (created in the portal — distribution profiles don't require any device). This is **verified working** on this Mac and is the **recommended path** below (Path C). If you'd rather use automatic signing, just register one device first (see Path B → B0).
+**Why you were seeing "Your team has no devices…":** the project used **automatic** signing, so Xcode kept trying to generate an *iOS App Development* profile — which a device‑less team can't create. **This is now fixed in the project:** signing is pinned to **manual** (Debug = no signing for the simulator; Release = *Apple Distribution* + the `TripForge App Store` profile). Opening the project or building for the simulator no longer triggers that error. The **only** remaining step is a one‑time creation of the App Store profile (below) — distribution profiles need **no device**.
 
 ---
 
